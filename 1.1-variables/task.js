@@ -1,9 +1,9 @@
  function averageMark(a, g, p) {
 
 
-     let algebra = a;
-     let geography = g;
-     let physics = p;
+     let algebra = a,
+         geography = g,
+         physics = p;
 
      let avgMark = (a + g + p) / 3;
 
