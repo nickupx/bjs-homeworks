@@ -24,7 +24,7 @@
          y = 22,
          z = 0;
 
-     result = x * y + 5 * z + x - 1;
+     let result = x * y + 5 * z + x - 1;
 
      return result;
  }
