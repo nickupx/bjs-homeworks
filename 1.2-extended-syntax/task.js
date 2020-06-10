@@ -37,6 +37,7 @@ function askDrink(name, dateOfBirthday) {
     let today = new Date();
     let yearToday = today.getFullYear();
     let yearOfBirth = dateOfBirthday.getFullYear();
+    let result;
     if (yearToday - yearOfBirth >= 18) {
         result = `Не желаете ли олд-фэшн, ${name}?`
     } else {
