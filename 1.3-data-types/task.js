@@ -22,7 +22,7 @@ function calculateTotalMortgage(percent, contribution, amount, date) {
     } else {
         let today = new Date;
         if (date <= today) {
-            totalAmount = `Марти Макфлай в ипотеке не нуждается`
+            totalAmount = 'Марти Макфлай в ипотеке не нуждается'
         } else {
             today = today.getFullYear() * 12 + today.getMonth();
             date = date.getFullYear() * 12 + date.getMonth();
