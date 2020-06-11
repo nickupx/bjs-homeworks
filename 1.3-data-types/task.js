@@ -1,9 +1,6 @@
 "use strict"
 
 function calculateTotalMortgage(percent, contribution, amount, date) {
-    percent = parseFloat(percent);
-    contribution = parseFloat(contribution);
-    amount = parseFloat(amount);
     let totalAmount;
     let input = [
         ['Процентная ставка', 'Начальный взнос', 'Общая стоимость', 'Срок ипотеки'],
