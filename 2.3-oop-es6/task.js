@@ -157,8 +157,8 @@ class StudentLog {
 
     getTotalAverage() {
         if (Object.keys(this.marks).length) {
-            let amount = 0;
-            let sum = 0;
+            let amount = 0,
+                sum = 0;
             for (let key in this.marks) {
                 for (let i = 0; i < this.marks[key].length; i++) {
                     sum += this.marks[key][i]
@@ -174,7 +174,6 @@ class StudentLog {
 }
 
 const log = new StudentLog('Oleg Gazmanov');
-
 log.addGrade(3, 'algebra');
 log.addGrade(5, 'english');
 log.addGrade(1, 'algebra');
