@@ -1,13 +1,7 @@
-// String.prototype.isPalindrome;
-
-function isPalindrome(str) {
-    const origin = str.toLowerCase().replace(/\s+/g, '');
+String.prototype.isPalindrome = function isPalindrome() {
+    const origin = this.toLowerCase().replace(/\s+/g, '');
     const reversed = origin.split('').reverse().join('');
-    if (reversed == origin) {
-        return true;
-    } else {
-        return false;
-    }
+    return reversed == origin;
 }
 
 function getAverageMark(marks) {
@@ -25,13 +19,10 @@ function getAverageMark(marks) {
 }
 
 function checkBirthday(bday) {
-    const now = +new Date();
-    const birthday = +new Date(bday);
+    let now = new Date();
+    let birthday = new Date(bday);
+
     const diff = now - birthday;
-    const age = diff / (365 * 24 * 60 * 60 * 1000);
-    if (age >= 18) {
-        return true
-    } else {
-        return false
-    }
+    const age = diff / (365.25 * 24 * 60 * 60 * 1000);
+    return age >= 18;
 }
