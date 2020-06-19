@@ -161,7 +161,7 @@ class StudentLog {
                 sum = 0;
             for (let key in this.marks) {
                 for (let i = 0; i < this.marks[key].length; i++) {
-                    sum += this.marks[key][i]
+                    sum += this.marks[key][i];
                     amount++;
                 }
             }
