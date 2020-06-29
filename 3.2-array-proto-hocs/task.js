@@ -15,16 +15,20 @@ function compareArrays(arr1, arr2) {
     return arr1.length === arr2.length && arr1.every((value, i) => arr2[i] === value)
 }
 
-function sum() {
-    let result = 0;
-    for (let i = 0; i < arguments.length; i++) {
-        result += arguments[i]
-    }
-    return result;
-}
-
 function memorize(fn, limit) {
     const memory = [];
-    memory.push({ args: fn.arguments, result: fn() })
-    return fn;
+    return function(...args) {
+        const res = memory.find(el => compareArrays(args, el.args));
+        if (res) {
+            return res.result
+        };
+
+        if (memory.length == limit) {
+            memory.shift()
+        };
+
+        memory.push({ args, result: fn(...args) });
+
+        return fn(...args);
+    }
 }
