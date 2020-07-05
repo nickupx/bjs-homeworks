@@ -4,7 +4,7 @@ class AlarmClock {
         this.timerId = null;
     }
 
-    addClock(time, id, callback) {
+    addClock(time, callback, id) {
         if (!id) {
             throw new Error('ID is missing')
         } else if (this.alarmCollection.some(clock => clock.id == id)) {
@@ -25,19 +25,19 @@ class AlarmClock {
     }
 
     getCurrentFormattedTime() {
-        const date = new Date;
-        return String(date.getHours()) + ':' + String(date.getMinutes());
+        const now = new Date;
+        return now.toLocaleTimeString().slice(0, -3);
     }
 
     start() {
-        function checkClock(id) {
-            if (this.getCurrentFormattedTime() == this.alarmCollection.find(el => el.id == id).time) {
-                callback();
+        const checkClock = alarm => {
+            if (this.getCurrentFormattedTime() == alarm.time) {
+                alarm.callback();
             }
         }
         if (!this.timerId) {
-            setInterval(() => {
-                this.alarmCollection.forEach(checkClock)
+            this.timerId = setInterval(() => {
+                this.alarmCollection.forEach(it => checkClock(it))
             }, 1000)
         }
     }
@@ -45,6 +45,7 @@ class AlarmClock {
     stop() {
         if (this.timerId) {
             clearInterval()
+            this.timerId = null;
         }
     }
 
@@ -54,14 +55,15 @@ class AlarmClock {
 
     clearAlarms() {
         this.stop();
+        this.alarmCollection = [];
 
     }
 }
 
 const myAlarm = new AlarmClock;
-myAlarm.addClock('20:00', 1, alarm);
-myAlarm.addClock('21:00', 3, alarm);
-myAlarm.addClock('23:00', 2, alarm);
+myAlarm.addClock('20:00', alarm, 1);
+myAlarm.addClock('21:00', alarm, 3);
+myAlarm.addClock('23:00', alarm, 2);
 
 function alarm() {
     console.log('Алярм!')
