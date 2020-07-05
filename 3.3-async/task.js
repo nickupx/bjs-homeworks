@@ -31,8 +31,8 @@ class AlarmClock {
 
     start() {
         const checkClock = alarm => {
-            if (this.getCurrentFormattedTime() == alarm.time) {
-                alarm.callback();
+            if (this.getCurrentFormattedTime() == this.alarm.time) {
+                this.alarm.callback();
             }
         }
         if (!this.timerId) {
