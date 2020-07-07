@@ -24,15 +24,18 @@ class AlarmClock {
         }
     }
 
-    getCurrentFormattedTime() {
-        const now = new Date;
+    getCurrentFormattedTime(addMin) {
+        let now = new Date();
+        if (addMin) {
+            return now.toLocaleTimeString(now.setMinutes(now.getMinutes() + addMin)).slice(0, -3);
+        }
         return now.toLocaleTimeString().slice(0, -3);
     }
 
     start() {
         const checkClock = alarm => {
-            if (this.getCurrentFormattedTime() == this.alarm.time) {
-                this.alarm.callback();
+            if (this.getCurrentFormattedTime() == alarm.time) {
+                alarm.callback();
             }
         }
         if (!this.timerId) {
@@ -60,11 +63,33 @@ class AlarmClock {
     }
 }
 
-const myAlarm = new AlarmClock;
-myAlarm.addClock('20:00', alarm, 1);
-myAlarm.addClock('21:00', alarm, 3);
-myAlarm.addClock('23:00', alarm, 2);
-
 function alarm() {
     console.log('Алярм!')
+}
+
+function testCase() {
+
+    const myAlarm = new AlarmClock;
+    myAlarm.addClock(myAlarm.getCurrentFormattedTime(), alarm, 1);
+
+    myAlarm.addClock(myAlarm.getCurrentFormattedTime(1), () => {
+        console.log('+ 1 мин и удаляем');
+        myAlarm.removeClock(2)
+    }, 2);
+
+    myAlarm.addClock(myAlarm.getCurrentFormattedTime(2), () => {
+        console.log('+2 мин, останавливаем, очищаем');
+        myAlarm.stop();
+        myAlarm.clearAlarms();
+        myAlarm.printAlarms();
+    }, 3);
+
+    myAlarm.addClock(myAlarm.getCurrentFormattedTime(10), alarm, 4);
+
+    myAlarm.addClock('19:00', () => { 'Существующий ID' }, 1);
+
+    myAlarm.printAlarms();
+    myAlarm.start();
+
+    console.log(myAlarm);
 }
